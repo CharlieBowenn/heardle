@@ -24,7 +24,8 @@ def gotAnswer(event, box):
 
 
 if __name__=='__main__':
-    root, frame = frontend.createGUI()
-    frontend.initBox(frame, command=gotAnswer)
-    frontend.initBut(frame, command=playSongg)
+    GUI = frontend.HeardleGUI()
+    GUI.initBox(command=gotAnswer)
+    GUI.initBut(command=playSongg)
+    root = GUI.root
     root.mainloop()
