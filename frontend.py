@@ -24,15 +24,26 @@ class HeardleGUI:
         self.guess5.pack(padx=5, pady=5)
         self.guess6 = ttk.Label(self.frame, text='Guess 6: ')
         self.guess6.pack(padx=5, pady=5)
+        self.guessLabels={
+            1: self.guess1,
+            2: self.guess2,
+            3: self.guess3,
+            4: self.guess4,
+            5: self.guess5,
+            6: self.guess6
+        }
 
     def initBut(self, command):
-        but = ttk.Button(self.frame, text="Listen Again", command=command)
-        but.pack(padx=5, pady=5)
+        self.but = ttk.Button(self.frame, text="Listen", command=command)
+        self.but.pack(padx=5, pady=5)
 
     def initBox(self, command):
-        answer = ttk.Entry(self.frame)
-        answer.pack(padx=5, pady=5)
-        answer.bind("<Return>", lambda event: command(event, answer))
+        self.answer = ttk.Entry(self.frame)
+        self.answer.pack(padx=5, pady=5)
+        self.answer.bind("<Return>", lambda event: command(event, self.answer))
+
+    def updateLabel(self, label, message):
+        self.label.config(text=message)
 
 # def getGuess():
 #     return answer.get()

@@ -5,8 +5,8 @@ import os
 from pydub import AudioSegment
 from pydub.playback import play, _play_with_simpleaudio
 
-print("Heardle!")
-print("Enter a song name as a guess.\nEnter blank space to hear again.")
+# print("Heardle!")
+# print("Enter a song name as a guess.\nEnter blank space to hear again.")
 roundTimes = {
     1: 1,
     2: 2,
@@ -15,16 +15,33 @@ roundTimes = {
     5: 10,
     6: 15
 }
+counter = 1
 choice = random.choice(os.listdir("Songs"))
 song = AudioSegment.from_mp3(f'Songs/{choice}')
 songname = choice[:-4]
 
+def getSong():
+    return songname
+
+def getRound():
+    return counter
+
+def incrementRound():
+    global counter
+    counter+=1
+
+def checkGuess(guess):
+    incrementRound()
+    if guess.upper()==songname.upper():
+        return True
+    else:
+        return False
+    
 
 def game():
-    counter = 1
     correct = False
     while counter<7 and correct!=True:
-        print(f"Round {counter}.\nYou have {roundTimes[counter]} seconds.")
+        # print(f"Round {counter}.\nYou have {roundTimes[counter]} seconds.")
         guess = round(counter)
         if guess.upper()==songname.upper():
             play(AudioSegment.from_mp3('Sounds/CorrectAnswer.mp3'))
