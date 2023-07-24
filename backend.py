@@ -1,4 +1,5 @@
 import time
+import random
 import simpleaudio
 import os
 from pydub import AudioSegment
@@ -14,8 +15,9 @@ roundTimes = {
     5: 10,
     6: 15
 }
-song = AudioSegment.from_mp3('Songs/HotelCalifornia.mp3')
-songname = "Hotel California"
+choice = random.choice(os.listdir("Songs"))
+song = AudioSegment.from_mp3(f'Songs/{choice}')
+songname = choice[:-4]
 
 
 def game():
