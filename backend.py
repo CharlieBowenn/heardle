@@ -57,5 +57,10 @@ def playSong(num):
     time.sleep(roundTimes[num])
     playback.stop()
 
-if __name__ == '__main__':
-    game()
+def playSongg():
+    playback = _play_with_simpleaudio(song)
+    time.sleep(3)
+    playback.stop()
+
+# if __name__ == '__main__':
+#     game()
