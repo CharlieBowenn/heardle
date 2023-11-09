@@ -1,6 +1,7 @@
 #Centralised file for integration of front & back end
 import backend
 import frontend
+import startscreen
 import tkinter as tk
 from tkinter import ttk
 import time
@@ -59,7 +60,7 @@ def showAnswer(gameResult, round=0):
     GUI.answerLabel.pack(padx=5, pady=5)
     root.update()
     if gameResult=='W':
-        GUI.titleLabel.config(text=f'Congratulations! You won in {round}/6 rounds')
+        GUI.titleLabel.config(text=f'Congratulations! You won in round {round} of 6')
         root.update()
         play(AudioSegment.from_mp3('Sounds/GameWon.mp3'))
     else:
@@ -71,9 +72,14 @@ def buttonPressed():
     round = backend.getRound()
     backend.playSong(backend.roundTimes[round])
 
-###############################CHECK IF ENTERED OPTION IS RIGHT; UPDATE ROUND NUMBER & TIME
+def butChoice(choice):
+    return choice
+
 
 if __name__=='__main__':
+    startScreen = startscreen.HeardleHomeScreen(butChoice)
+    choice = startScreen.start()
+    backend.getChoice(choice)
     GUI = frontend.HeardleGUI()
     GUI.initBox(command=gotAnswer)
     GUI.initBut(command=buttonPressed)

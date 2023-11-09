@@ -1,3 +1,4 @@
+import spotifyAccessor
 import time
 import random
 import simpleaudio
@@ -16,9 +17,13 @@ roundTimes = {
     6: 15
 }
 counter = 1
-choice = random.choice(os.listdir("Songs"))
-song = AudioSegment.from_mp3(f'Songs/{choice}')
-songname = choice[:-4]
+def getChoice(choice):
+    global song
+    global songname
+    song, songname = spotifyAccessor.setup(choice)
+# choice = random.choice(os.listdir("Songs"))
+
+# songname = choice[:-4]
 
 def getSong():
     return songname
@@ -70,8 +75,9 @@ def round(num):
 
 
 def playSong(num):
+    global song
     playback = _play_with_simpleaudio(song)
-    time.sleep(roundTimes[num])
+    time.sleep(num)
     playback.stop()
 
 def playSongg():
